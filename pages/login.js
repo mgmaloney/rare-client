@@ -10,7 +10,7 @@ function Login({ setToken }) {
   const navigate = useRouter();
   const [isUnsuccessful, setisUnsuccessful] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     const user = {
@@ -18,14 +18,16 @@ function Login({ setToken }) {
       password: password.current.value,
     };
 
-    loginUser(user).then((res) => {
-      if ('valid' in res && res.valid) {
-        setToken(res.token);
-        navigate.push('/');
-      } else {
-        setisUnsuccessful(true);
-      }
-    });
+    const validLogin = JSON.parse(await loginUser(user));
+    console.warn(validLogin);
+    console.warn(validLogin.valid);
+    console.warn(validLogin);
+    if (validLogin.valid === true) {
+      setToken(validLogin.token);
+      navigate.push('/');
+    } else {
+      setisUnsuccessful(true);
+    }
   };
 
   return (
