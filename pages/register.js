@@ -29,8 +29,9 @@ function Home({ setToken }) {
       };
 
       registerUser(newUser).then((res) => {
-        if ('valid' in res && res.valid) {
-          setToken(res.token);
+        const response = JSON.parse(res);
+        if (response.valid === true && response.valid) {
+          setToken(response.token);
           navigate.push('/');
         }
       });
