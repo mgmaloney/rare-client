@@ -2,11 +2,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import UserContext from '../utils/context/userContext';
 import NavBar from '../components/nav/NavBar';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   const [token, setTokenState] = useState(null);
+  const [user, setUser] = useState({});
   const router = useRouter();
 
   useEffect(() => {
@@ -34,8 +36,10 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <NavBar token={token} setToken={setToken} />
-      <Component {...newPageProps} />
+      <UserContext.Provider value={{ user, setUser }}>
+        <NavBar token={token} setToken={setToken} />
+        <Component {...newPageProps} />
+      </UserContext.Provider>
     </>
   );
 }

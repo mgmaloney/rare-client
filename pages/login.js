@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { loginUser } from '../utils/data/AuthManager';
+import UserContext from '../utils/context/userContext';
 
 function Login({ setToken }) {
   const username = useRef();
   const password = useRef();
   const navigate = useRouter();
   const [isUnsuccessful, setisUnsuccessful] = useState(false);
+  // const { setUser } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,11 +21,9 @@ function Login({ setToken }) {
     };
 
     const validLogin = JSON.parse(await loginUser(user));
-    console.warn(validLogin);
-    console.warn(validLogin.valid);
-    console.warn(validLogin);
     if (validLogin.valid === true) {
       setToken(validLogin.token);
+      // set
       navigate.push('/');
     } else {
       setisUnsuccessful(true);
