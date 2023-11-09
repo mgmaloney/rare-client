@@ -1,7 +1,7 @@
-const postEndpoint = 'http://localhost:8088/posts';
+const commentEndpoint = 'http://localhost:8088/comments';
 
-const getPosts = () => new Promise((resolve, reject) => {
-  fetch(`${postEndpoint}`, {
+const getComments = () => new Promise((resolve, reject) => {
+  fetch(`${commentEndpoint}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -18,25 +18,13 @@ const getPosts = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSinglePost = (id) => new Promise((resolve, reject) => {
-  fetch(`${postEndpoint}/${id}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
-    .catch(reject);
-});
-
-const createPost = (postData) => new Promise((resolve, reject) => {
-  fetch(`${postEndpoint}`, {
+const createComment = (commentData) => new Promise((resolve, reject) => {
+  fetch(`${commentEndpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(postData),
+    body: JSON.stringify(commentData),
   })
     .then((response) => {
       if (!response.ok) {
@@ -48,13 +36,13 @@ const createPost = (postData) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updatePost = (id, currentPost) => new Promise((resolve, reject) => {
-  fetch(`${postEndpoint}/${id}`, {
+const updateComment = (id, currentComment) => new Promise((resolve, reject) => {
+  fetch(`${commentEndpoint}/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(currentPost),
+    body: JSON.stringify(currentComment),
   })
     .then((response) => {
       if (!response.ok) {
@@ -66,8 +54,8 @@ const updatePost = (id, currentPost) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deletePost = (id) => new Promise((resolve, reject) => {
-  fetch(`${postEndpoint}/${id}`, {
+const deleteComment = (id) => new Promise((resolve, reject) => {
+  fetch(`${commentEndpoint}/${id}`, {
     method: 'DELETE',
   })
     .then((response) => {
@@ -80,9 +68,8 @@ const deletePost = (id) => new Promise((resolve, reject) => {
 });
 
 export {
-  getPosts,
-  getSinglePost,
-  createPost,
-  updatePost,
-  deletePost,
+  getComments,
+  createComment,
+  updateComment,
+  deleteComment,
 };

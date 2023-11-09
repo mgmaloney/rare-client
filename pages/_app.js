@@ -24,8 +24,8 @@ function MyApp({ Component, pageProps }) {
   }, [router, token]);
 
   const setToken = (newToken) => {
-    localStorage.setItem('auth_token', newToken);
-    setTokenState(newToken);
+    localStorage.setItem('auth_token', newToken.toString());
+    setTokenState(newToken.toString());
   };
 
   const newPageProps = { ...pageProps, token, setToken };
