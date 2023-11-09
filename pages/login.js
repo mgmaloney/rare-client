@@ -21,7 +21,6 @@ function Login({ setToken }) {
     const validLogin = JSON.parse(await loginUser(user));
     console.warn(validLogin);
     console.warn(validLogin.valid);
-    console.warn(validLogin);
     if (validLogin.valid === true) {
       setToken(validLogin.token);
       navigate.push('/');
