@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import getAllPosts from '../utils/data/postsData';
+import getPosts from '../utils/data/postsData';
 import DisplayPostCard from '../components/PostCard';
 
 function PostHome() {
   const [posts, setPosts] = useState([]);
 
   const getAllThePosts = () => {
-    getAllPosts().then(setPosts);
+    getPosts().then(setPosts);
   };
 
   useEffect(() => {
