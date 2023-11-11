@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import getPosts from '../utils/data/postsData';
+import Button from 'react-bootstrap/Button';
+import { getPosts } from '../utils/data/postsData';
 import DisplayPostCard from '../components/PostCard';
 
 function PostHome() {
@@ -15,6 +16,7 @@ function PostHome() {
 
   return (
     <div className="text-center my-4">
+      <Button>Create Post</Button>
       {posts.map((post) => (
         <DisplayPostCard key={post.id} postObj={post} onUpdate={getAllThePosts} />
       ))}
