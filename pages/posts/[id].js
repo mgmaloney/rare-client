@@ -1,13 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
 import { useRouter } from 'next/router';
 import { Card } from 'react-bootstrap';
-import { getSinglePost } from '../../utils/data/postsData';
+import { deletePost, getSinglePost } from '../../utils/data/postsData';
 
 const ViewPost = () => {
   const router = useRouter();
   const [postDetails, setPostDetails] = useState({});
   const { id } = router.query;
+
+  const deleteThisPost = () => {
+    if (window.confirm('Delete Post?')) {
+      deletePost(id).then(() => router.push('/posts'));
+    }
+  };
 
   useEffect(() => {
     getSinglePost(id).then((postData) => {
@@ -44,6 +51,9 @@ const ViewPost = () => {
             ))}
           </ul>
         </div>
+        <Button variant="danger" onClick={deleteThisPost} className="m-2">
+          Delete Post
+        </Button>
       </Card>
     </>
   );
